@@ -75,7 +75,7 @@ public final class Main extends JavaPlugin implements Listener {
     }
       count++;
   }
-
+//プルリクtest
   @EventHandler
   //プレイヤーがベッドに入る、入ろうとした時
   public void onPlayerBedEnter(PlayerBedEnterEvent e) {
