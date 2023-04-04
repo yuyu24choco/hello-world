@@ -19,6 +19,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedEnterEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -31,6 +32,7 @@ public final class Main extends JavaPlugin implements Listener {
   @Override
   public void onEnable() {
     Bukkit.getPluginManager().registerEvents(this, this);
+    getCommand("Level50").setExecutor(new LevelUpCommand());
   }
 
 
@@ -69,13 +71,14 @@ public final class Main extends JavaPlugin implements Listener {
         // 追加した情報で再設定する。
         firework.setFireworkMeta(fireworkMeta);
       }
-      Path path = Path.of("firework.txt");
-      Files.writeString(path,"たーまやー", StandardOpenOption.APPEND);
-      player.sendMessage(Files.readString(path));
     }
-      count++;
+    count++;
   }
-//プルリクtest
+  @EventHandler
+  public void onPlayerJoin(PlayerJoinEvent e){
+    e.setJoinMessage("さぁ今日も楽しもう！" + e.getPlayer());
+  }
+
   @EventHandler
   //プレイヤーがベッドに入る、入ろうとした時
   public void onPlayerBedEnter(PlayerBedEnterEvent e) {
